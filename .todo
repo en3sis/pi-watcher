@@ -1,0 +1,4 @@
+Camera:
+  At this moment it takes ~3sec to boot the camera.
+  A solution would be to have it always open and only record
+  when the motion sensor triggers.

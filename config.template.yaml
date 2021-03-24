@@ -1,0 +1,7 @@
+
+cloud_name: 'cloudinary_name'
+api_key: 'cloudinary_key'
+api_secret: 'cloudinary_secret'
+
+clip_length: 14  # in seconds
+clip_folder: '_temp/'
