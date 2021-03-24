@@ -1,7 +1,11 @@
 ## First steps:
 #### Variables:
 - `export DISPLAY=:0`
-- Check under `utils/config.template.py` and fill the missing variables
+- Check under `config.template.yaml` and fill the missing variables
+
+### Install dependencies:
+Run `pip3 install cloudinary emoji pyyaml cv2`
+
 ### Run the APP:
 Run `python3 main.py`
 
