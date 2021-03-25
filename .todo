@@ -1,4 +1,7 @@
-Camera:
+Recording:
   At this moment it takes ~3sec to boot the camera.
-  A solution would be to have it always open and only record
-  when the motion sensor triggers.
+  ☐ A solution would be to have it always open and only record when the motion sensor triggers.
+  ☐ Use computer-vision to detect motion instead of inflared (since it won't detect objects behind a windows)
+
+Improvements:
+   ☐ Have the camera always on, buffer chunks of 10 sec and if it needs to record, attach the last 10s so that way we get the whole moment and not only when then object is part of the scene (since the camera takes a few seconds to record, it wont capture the object entering the scene)
