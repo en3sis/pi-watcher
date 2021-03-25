@@ -5,7 +5,7 @@ import time
 # Define pins
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BOARD)
-GPIO.setup(11, GPIO.IN)  # Motion seor input
+GPIO.setup(11, GPIO.IN)  # Motion sensor input
 GPIO.setup(3, GPIO.OUT)  # Debugging only
 
 

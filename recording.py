@@ -2,14 +2,11 @@
 import time
 import emoji
 
-from cv2 import cv2
 
-# Constants
-TIME_STAMP = str(time.time()).replace('.', '')
-
-
-def record_video(CONFIG):
+def record_video(CONFIG, cv2):
+  TIME_STAMP = str(time.time()).replace('.', '')
   cap = cv2.VideoCapture(0)
+  time.sleep(3)
   # TODO: Update the frame rate/resolution
   # cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
   # cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
@@ -31,7 +28,6 @@ def record_video(CONFIG):
         frame = cv2.flip(frame, 180)
         # write the flipped frame
         out.write(frame)
-        # cv2.imshow('frame', frame)
 
   # Release everything if job is finished
   cap.release()
@@ -39,25 +35,3 @@ def record_video(CONFIG):
   cv2.destroyAllWindows()
 
   return CONFIG["clip_folder"] + TIME_STAMP + '.avi'
-
-
-# Only for DEMO/Debug
-def captureVideo():
-  cap = cv2.VideoCapture(0)
-
-  while(True):
-    timer = cv2.getTickCount()
-    # Capture frame-by-frame
-    ret, frame = cap.read()
-
-    # Our operations on the frame come here
-    # cv2.putText()
-
-    # Display the resulting frame
-    cv2.imshow('frame', frame)
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-      break
-
-  # When everything done, release the capture
-  cap.release()
-  cv2.destroyAllWindows()

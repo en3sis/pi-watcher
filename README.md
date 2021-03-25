@@ -11,3 +11,6 @@ Run `python3 main.py`
 
 ## Notes:
 - Install packages for a different pyton version `python3 -m pip install cloudinary`
+
+
+<!-- Bank holidays + vacations -->
