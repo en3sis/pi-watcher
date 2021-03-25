@@ -3,14 +3,12 @@ import time
 import emoji
 
 from cv2 import cv2
-# from libs.cloudinary import upload_file
+
 # Constants
 TIME_STAMP = str(time.time()).replace('.', '')
 
-video = cv2.VideoCapture(0)
 
-
-def record_video(CONFIG):
+def record_video(CONFIG, video):
   cap = video
   # TODO: Update the frame rate/resolution
   # cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
@@ -41,29 +39,3 @@ def record_video(CONFIG):
   cv2.destroyAllWindows()
 
   return CONFIG["clip_folder"] + TIME_STAMP + '.avi'
-
-
-# Only for DEMO/Debug
-def captureVideo(CONFIG):
-  cap = cv2.VideoCapture(0)
-
-  while(True):
-    # timer = cv2.getTickCount()
-    # Capture frame-by-frame
-    ret, frame = cap.read()
-
-    # Our operations on the frame come here
-    # cv2.putText()
-
-    # Display the resulting frame
-    cv2.imshow('frame', frame)
-    # if cv2.waitKey(1) & 0xFF == ord('q'):
-    #   video_file = record_video(CONFIG)
-    #   upload_file(str(video_file), CONFIG)
-    #   print(emoji.emojize(":eye:  Waiting for motion..."))
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-      break
-
-  # When everything done, release the capture
-  cap.release()
-  cv2.destroyAllWindows()
