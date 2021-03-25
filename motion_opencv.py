@@ -8,11 +8,12 @@ def motion_detection(cv2):
   video = cv2.VideoCapture(0)
   time.sleep(3)
   avg = None
-  # start_time = time.time()
+  areaValue = 0
   print(emoji.emojize(":eye: Looking for motion..."))
 
   while True:
     check, frame = video.read()
+
     # convert imags to grayscale &  blur the result
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     gray = cv2.GaussianBlur(gray, (21, 21), 0)
@@ -20,12 +21,7 @@ def motion_detection(cv2):
     # inittialize avg if it hasn't been done
     if avg is None:
       avg = gray.copy().astype("float")
-      # rawCapture.truncate(0)
       continue
-
-    # end_time = time.time()
-    # if(end_time - start_time >= 6):
-    #   continue
 
     # accumulate the weighted average between the current frame and
     # previous frames, then compute the difference between the current
@@ -54,15 +50,13 @@ def motion_detection(cv2):
       cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
       area = cv2.contourArea(cnt)
 
-      # print area to the terminal
-      # print(int(area))
-      # cv2.putText(frame, "Area", (x, y - 10), 0, 0.5, (0, 255, 0), 2)
-
       if(int(area) > 5000):
         break
-
+      areaValue = area
       cv2.putText(frame, "Largest Contour", (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
 
+    # Show Area
+    cv2.putText(frame, str(int(areaValue)), (0 + 10, 0 + 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
     # show the frame
     cv2.imshow("Video", frame)
 

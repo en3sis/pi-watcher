@@ -16,6 +16,11 @@ with open('config.yaml') as f:
   CONFIG = data
 
 while True:
+  # Enables motion detection
   motion_detection(cv2)
+
+  # Triggers the clip recoding
   vic = record_video(CONFIG, cv2)
+
+  # Uploads the video to Cloudinary
   upload_file(vic, CONFIG)

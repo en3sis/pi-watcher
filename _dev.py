@@ -15,26 +15,12 @@ with open('config.yaml') as f:
   CONFIG = data
 
 
-# print('Adjusting camara lighting')
-# time.sleep(2)
-
-# start_time = time.time()
-
-# global canRecord
-# canRecord = True
-
-
 while True:
-  # end_time = time.time()
-
-  # if(end_time - start_time >= 60):
-  #   canRecord = True
-  #   start_time = time.time()
-
+  # Enables motion detection
   motion_detection(cv2)
-  vic = record_video(CONFIG, cv2)
-  upload_file(vic, CONFIG)
-  # if canRecord == True:
-  #   canRecord = False
 
-  # print(vic)
+  # Triggers the clip recoding
+  vic = record_video(CONFIG, cv2)
+
+  # Uploads the video to Cloudinary
+  upload_file(vic, CONFIG)
