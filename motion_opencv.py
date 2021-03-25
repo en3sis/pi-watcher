@@ -1,10 +1,16 @@
 # https://raw.githubusercontent.com/bnbe-club/opencv-object-detection-diy-33/master/basic-motion-detection-avg.py
 import time
 import numpy as np
+import emoji
 
 
-def motion_detection(cv2, video):
+def motion_detection(cv2):
+  video = cv2.VideoCapture(0)
+  time.sleep(3)
   avg = None
+  # start_time = time.time()
+  print(emoji.emojize(":eye: Looking for motion..."))
+
   while True:
     check, frame = video.read()
     # convert imags to grayscale &  blur the result
@@ -16,6 +22,10 @@ def motion_detection(cv2, video):
       avg = gray.copy().astype("float")
       # rawCapture.truncate(0)
       continue
+
+    # end_time = time.time()
+    # if(end_time - start_time >= 6):
+    #   continue
 
     # accumulate the weighted average between the current frame and
     # previous frames, then compute the difference between the current
@@ -46,7 +56,7 @@ def motion_detection(cv2, video):
 
       # print area to the terminal
       # print(int(area))
-      cv2.putText(frame, "Area", (x, y - 10), 0, 0.5, (0, 255, 0), 2)
+      # cv2.putText(frame, "Area", (x, y - 10), 0, 0.5, (0, 255, 0), 2)
 
       if(int(area) > 5000):
         break

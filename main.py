@@ -1,26 +1,21 @@
-#!/usr/bin/env python3.7.3
-import time
+import motion_opencv
 import yaml
+import time
 import emoji
+from cv2 import cv2
 
+# Custom functions
+from recording import record_video
 from libs.cloudinary import upload_file
-from motion import watchForMotion
-from recording import captureVideo, record_video
+from motion_opencv import motion_detection
 
-CONFIG = ''
+CONFIG = None
+
 with open('config.yaml') as f:
   data = yaml.load(f, Loader=yaml.FullLoader)
   CONFIG = data
 
-print(emoji.emojize(":eye:  Waiting for motion..."))
 while True:
-  status = watchForMotion()
-  if status == True:
-    print(emoji.emojize(":bird: Motion detected"))
-    video_file = record_video(CONFIG)
-    upload_file(str(video_file), CONFIG)
-    print(emoji.emojize(":eye:  Waiting for motion..."))
-
-# Debuging and testing
-# captureVideo()
-# record_video()
+  motion_detection(cv2)
+  vic = record_video(CONFIG, cv2)
+  upload_file(vic, CONFIG)

@@ -2,14 +2,11 @@
 import time
 import emoji
 
-from cv2 import cv2
 
-# Constants
-TIME_STAMP = str(time.time()).replace('.', '')
-
-
-def record_video(CONFIG, video):
-  cap = video
+def record_video(CONFIG, cv2):
+  TIME_STAMP = str(time.time()).replace('.', '')
+  cap = cv2.VideoCapture(0)
+  time.sleep(3)
   # TODO: Update the frame rate/resolution
   # cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
   # cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
@@ -31,7 +28,6 @@ def record_video(CONFIG, video):
         frame = cv2.flip(frame, 180)
         # write the flipped frame
         out.write(frame)
-        # cv2.imshow('frame', frame)
 
   # Release everything if job is finished
   cap.release()
