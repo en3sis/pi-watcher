@@ -15,21 +15,36 @@ with open('config.yaml') as f:
 
 video = cv2.VideoCapture(0)
 print('Adjusting camara lighting')
-# time.sleep(6)
+time.sleep(6)
+
+
+def recordAndUpload():
+  video_file = record_video(CONFIG)
+
+  return print(video_file)
+  upload_file(str(video_file), CONFIG)
+  print(emoji.emojize(":eye:  Waiting for motion..."))
+
+
+# secThread = threading.Thread(target=recordAndUpload)
 
 
 avg = None
 
 print(emoji.emojize(":eye:  Waiting for motion..."))
 
-while True:
-  def recordAndUpload():
-    video_file = record_video(CONFIG, video, cv2)
-    return print(video_file)
-    # upload_file(str(video_file), CONFIG)
-    # print(emoji.emojize(":eye:  Waiting for motion..."))
+global start_time
+global canRecord
+start_time = time.time()
+canRecord = False
 
-  secThread = threading.Thread(target=recordAndUpload)
+while True:
+  end_time = time.time()
+
+  print("total time taken this loop: ", end_time - start_time)
+  if(end_time - start_time >= 10):
+    canRecord = True
+    start_time = time.time()
 
   check, frame = video.read()
   # convert imags to grayscale &  blur the result
@@ -70,14 +85,12 @@ while True:
     area = cv2.contourArea(cnt)
 
     # print area to the terminal
-    print(area)
+    print(int(area))
 
-    if secThread.is_alive() == False:
-      if (area > 4000) & (area < 5000):
-        print(emoji.emojize(":bird: Motion detected"))
-        secThread.start()
-        secThread.join()
-      # continue
+    if(int(area) > 5000):
+      if canRecord == True:
+        canRecord = False
+        recordAndUpload()
 
     # add text to the frame
     cv2.putText(frame, "Largest Contour", (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
@@ -89,5 +102,6 @@ while True:
   key = cv2.waitKey(1) & 0xFF
   if key == ord('q'):
     break
+
 
 cv2.destroyAllWindows()

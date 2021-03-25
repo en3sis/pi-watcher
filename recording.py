@@ -2,14 +2,16 @@
 import time
 import emoji
 
-# from cv2 import cv2
+from cv2 import cv2
 # from libs.cloudinary import upload_file
 # Constants
 TIME_STAMP = str(time.time()).replace('.', '')
 
+video = cv2.VideoCapture(0)
 
-def record_video(CONFIG, videoInput, cv2):
-  cap = videoInput
+
+def record_video(CONFIG):
+  cap = video
   # TODO: Update the frame rate/resolution
   # cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
   # cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
