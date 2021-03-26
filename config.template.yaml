@@ -4,4 +4,4 @@ api_key: 'cloudinary_key'
 api_secret: 'cloudinary_secret'
 
 clip_length: 14  # in seconds
-clip_folder: '_temp/'
+clip_folder: '_temp/' # clips temporally folder. They will be deleted once uploaded to Cloudinary
