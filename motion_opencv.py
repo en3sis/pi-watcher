@@ -9,6 +9,8 @@ def motion_detection(cv2):
   time.sleep(3)
   avg = None
   areaValue = 0
+
+  preview = False
   print(emoji.emojize(":eye: Looking for motion..."))
 
   while True:
@@ -51,12 +53,16 @@ def motion_detection(cv2):
       area = cv2.contourArea(cnt)
 
       if(int(area) > 5000):
-        break
+        if not preview:
+          break
+
       areaValue = area
       cv2.putText(frame, "Largest Contour", (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
 
     # Show Area
-    cv2.putText(frame, str(int(areaValue)), (0 + 10, 0 + 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
+    cv2.putText(frame, str(int(areaValue)), (0 + 10, 0 + 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 1)
+    cv2.putText(frame, str("Preview: " + str(preview)), (0 + 10, 0 + 40),
+                cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255) if preview else (0, 0, 000), 1)
     # show the frame
     cv2.imshow("Video", frame)
 
@@ -64,5 +70,10 @@ def motion_detection(cv2):
     key = cv2.waitKey(1) & 0xFF
     if key == ord('q'):
       break
+    if key == ord('p'):
+      if preview:
+        preview = False
+      else:
+        preview = True
 
   cv2.destroyAllWindows()

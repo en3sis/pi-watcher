@@ -1,4 +1,3 @@
-import motion_opencv
 import yaml
 import time
 import emoji

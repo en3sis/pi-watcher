@@ -1,8 +1,11 @@
 Recording:
   ✔ Use computer-vision to detect motion instead of inflared (since it won't detect objects behind a windows) @done(21-03-25 17:31)
+  ☐ Use the active video from motion_opencv instance to continue recording
 
 Improvements:
   ☐ Have the camera always on, buffer chunks of 10 sec and if it needs to record, attach the last 10s so that way we get the whole moment and not only when then object is part of the scene (since the camera takes a few seconds to record, it wont capture the object entering the scene)
   ☐ If it's windy, It should have some safty mechanism to detect it (if the difference changes a lot and really fast)
   ☐ Stop the funtionality at night (between 20:00 - 06:00) @critical
-  ☐ Highlighted area for the motion to avoid targeting things outside (like a tree moved by the wind)
+  ☐ Highlighted area for the motion to avoid targeting things outside (like a tree branch moving by the wind)
+  ✔ Previw mode to help adjust the camera position @done(21-03-26 09:15)
+  ☐ Continue recording on motion

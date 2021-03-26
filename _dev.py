@@ -1,4 +1,4 @@
-import motion_opencv
+# Playground file
 import yaml
 import time
 import emoji
